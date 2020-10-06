@@ -18,6 +18,8 @@ import { MyOrderComponent } from './my-order/my-order.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
+import { AuthGaurdService } from './auth-gaurd.service';
 
 @NgModule({
   declarations: [
@@ -43,16 +45,18 @@ import { LoginComponent } from './login/login.component';
       {path:'', component:HomeComponent},
       {path:'products', component: ProductComponent},
       {path:'shopping-cart', component:ShoppingCartComponent},
-      {path: 'check-out',component:CheckOutComponent},
-      {path: 'order-success',component:OrderSuccessComponent},
       {path: 'login',component:LoginComponent},
-      {path: 'my/orders',component:MyOrderComponent},
+
+      {path: 'check-out',component:CheckOutComponent, canActivate: [AuthGaurdService]},
+      {path: 'order-success',component:OrderSuccessComponent, canActivate: [AuthGaurdService]},
+      {path: 'my/orders',component:MyOrderComponent,canActivate: [AuthGaurdService]},
+
       {path: 'admin/products',component:AdminProductsComponent},
       {path: 'admin/orders',component:AdminOrdersComponent},
      
     ])
   ],
-  providers: [],
+  providers: [AuthService,AuthGaurdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
