@@ -4,6 +4,7 @@ import { AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { RouterModule} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -22,6 +23,9 @@ import { AuthService } from './auth.service';
 import { AuthGaurdService } from './auth-gaurd.service';
 import { UserService } from './user.service';
 import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
+import { ProductFormComponent } from './Admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -35,11 +39,13 @@ import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
     MyOrderComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -54,11 +60,12 @@ import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
       {path: 'my/orders',component:MyOrderComponent,canActivate: [AuthGaurdService]},
 
       {path: 'admin/products',component:AdminProductsComponent, canActivate:[AuthGaurdService,AdminAuthGaurdService]},
+      {path: 'admin/product-form',component:ProductFormComponent, canActivate:[AuthGaurdService,AdminAuthGaurdService]},
       {path: 'admin/orders',component:AdminOrdersComponent,canActivate:[AuthGaurdService,AdminAuthGaurdService]},
      
     ])
   ],
-  providers: [AuthService,AuthGaurdService, UserService, AdminAuthGaurdService],
+  providers: [AuthService,AuthGaurdService, ProductService,UserService, AdminAuthGaurdService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

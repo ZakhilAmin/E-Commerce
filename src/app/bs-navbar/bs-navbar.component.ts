@@ -13,7 +13,7 @@ import { AppUser } from '../models/app-user';
 export class BsNavbarComponent implements OnInit {
   appUser: AppUser;
   constructor(private auth:AuthService) { 
-    auth.appUser$.subscribe(appUser=>this.appUser=this.appUser);
+    auth.appUser$.subscribe(appUser=>this.appUser=appUser);
   }
 
   ngOnInit() {
