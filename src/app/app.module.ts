@@ -5,6 +5,9 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import { CustomFormsModule} from 'ng2-validation';
+import {DataTableModule} from 'angular-4-data-table';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -26,6 +29,7 @@ import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
 import { ProductFormComponent } from './Admin/product-form/product-form.component';
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
+import { DatatablesComponent } from './datatables/datatables.component';
 
 @NgModule({
   declarations: [
@@ -40,27 +44,34 @@ import { ProductService } from './product.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    DatatablesComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
+    //DataTableModule,
+    DataTablesModule,
+    CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot([
-      {path:'', component:HomeComponent},
+      {path:'', component:ProductComponent},
       {path:'products', component: ProductComponent},
       {path:'shopping-cart', component:ShoppingCartComponent},
       {path: 'login',component:LoginComponent},
+      {path: 'datatable',component:DatatablesComponent},
 
       {path: 'check-out',component:CheckOutComponent, canActivate: [AuthGaurdService]},
       {path: 'order-success',component:OrderSuccessComponent, canActivate: [AuthGaurdService]},
       {path: 'my/orders',component:MyOrderComponent,canActivate: [AuthGaurdService]},
 
-      {path: 'admin/products',component:AdminProductsComponent, canActivate:[AuthGaurdService,AdminAuthGaurdService]},
+     
       {path: 'admin/product-form',component:ProductFormComponent, canActivate:[AuthGaurdService,AdminAuthGaurdService]},
+      {path: 'admin/products/:id',component:ProductFormComponent, canActivate:[AuthGaurdService,AdminAuthGaurdService]},
+      {path: 'admin/products',component:AdminProductsComponent, canActivate:[AuthGaurdService,AdminAuthGaurdService]},
       {path: 'admin/orders',component:AdminOrdersComponent,canActivate:[AuthGaurdService,AdminAuthGaurdService]},
      
     ])

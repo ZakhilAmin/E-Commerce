@@ -1,0 +1,19 @@
+<h1>Angular Datatables Step by Step Example - ItSolutionStuff.com</h1>
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of products">
+      <td>{{ post.key }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.price | currency: 'USD': true}}</td>
+      <td><a [routerLink]="['/admin/products/',post.key]">Edit</a></td>
+    </tr>
+  </tbody>
+</table>

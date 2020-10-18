@@ -1,2 +1,40 @@
-<h2>Product Form for Admin User Only</h2>
+<h4>Product Form for Admin User Only</h4>
 <button class="btn btn-primary" routerLink="/admin/product-form">New Product</button>
+<!-- 
+<p>
+    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search.....">
+</p>
+
+<data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)" >
+    <data-table-column [property]="'title'" [header]="'Title'" [sortable]="true" [resizable]="true"></data-table-column>
+    <data-table-column [property]="'price'" [header]="'Price'" [sortable]="true" [resizable]="true">
+        <ng-tamplate #dataTableCell let-item="item">
+            {{item.price | currency: 'USD': true }}
+        </ng-tamplate>
+    </data-table-column>
+    <data-table-column [property]="'key'">
+        <ng-tamplate #dataTableCell let-item="item">
+            <a [routerLink]="['/admin/products/',item.key]">Edit</a>
+        </ng-tamplate>
+    </data-table-column>
+</data-table> -->
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.key }}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.price | currency: 'USD': true}}</td>
+        <td>{{ product.category }}</td>
+        <td><a [routerLink]="['/admin/products/',product.key]">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
